@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body
+{
+    font-size: 30px;
+    background-color: rgb(219, 219, 219);
+}
+
+a,
+button
+{
+    background-color: white;
+    padding: 1.25rem;
+    font-size: 1.75rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px black;
+    user-select: none;
+    text-align: center;
+}
+
+a
+{
+    text-decoration: none;
+    color: black;
+}
+
+h1
+{
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 0 white;
+    user-select: none;
+    text-align: center;
+}
+
+main
+{
+    width: min(100% - 2rem, 20rem);
+    margin-inline: auto;
+    height: 100vh;
+}
+
+.buttons,
+main
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.buttons
+{
+    gap: 10px
+}
+
+.instructions
+{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: rgb(219, 219, 219, 0.95);
+    padding: 50px;
+}
+
+.instructions> :not(.instructions:last-child)
+{
+    margin-bottom: 20px;
+}

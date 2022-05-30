@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/game.css">
+    <script src="./js/game.js" defer></script>
+</head>
+
+<body>
+    <nav>
+        <p id="timer">00:15</p>
+        <p id="questionProgress"></p>
+        <p id="score">Score: 0</p>
+    </nav>
+    <div id="timerProgression"></div>
+    <main>
+        <h1 id="brandName"></h1>
+        <div class="div-options">
+            <button onclick="selection(1)">
+                <img src="./images/Starbucks/PngReal/Starbucks-RealLogo.png" id="img1">
+            </button>
+            <button onclick="selection(2)">
+                <img src="./images/Starbucks/PngFake/Starbucks-FakeLogo01 (1).png" id="img2">
+            </button>
+            <button onclick="selection(3)">
+                <img src="./images/Starbucks/PngFake/Starbucks-FakeLogo01 (1).png" id="img3">
+            </button>
+            <button onclick="selection(4)">
+                <img src="./images/Starbucks/PngFake/Starbucks-FakeLogo01 (1).png" id="img4">
+            </button>
+        </div>
+    </main>
+    <div id="results">
+        <h1 id="textResult"></h1>
+        <div class="links">
+            <a href="./game.html">
+                Jogar novamente
+            </a>
+            <a href="./index.html">
+                Home
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
