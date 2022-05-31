@@ -1,11 +1,11 @@
-const timerProgression = document.getElementById("timerProgression");
-const timerHTML = document.getElementById("timer");
-const questionProgressHTML = document.getElementById('questionProgress');
-const scoreHTML = document.getElementById('score');
-const brandName = document.getElementById('brandName');
+const timerProgression = document.getElementById("timerProgression"),
+    timerHTML = document.getElementById("timer"),
+    questionProgressHTML = document.getElementById('questionProgress'),
+    scoreHTML = document.getElementById('score'),
+    brandName = document.getElementById('brandName'),
 
-const images = Array.from(document.querySelectorAll("img"));
-const buttons = Array.from(document.querySelectorAll("button"));
+    images = Array.from(document.querySelectorAll("img")),
+    buttons = Array.from(document.querySelectorAll("button"));
 
 const questions = [
     [
@@ -28,13 +28,14 @@ const questions = [
 
 const MAX_QUESTIONS = questions.length;
 
-let countQuestions;
-let availableQuestions;
-let score;
-let currentQuestion;
-let acceptingQuestions;
-let timer;
-let tempo = 15;
+let countQuestions,
+    availableQuestions,
+    score,
+    rightQuestions = 0,
+    currentQuestion,
+    acceptingQuestions,
+    timer,
+    tempo = 15;
 
 function setTimer()
 {
@@ -85,7 +86,7 @@ function getQuestion()
         const results = document.getElementById('results');
         const textResult = document.getElementById('textResult');
         results.style.display = 'flex';
-        textResult.innerText = `O seu resultado final foi de ${score} pontos!!!`;
+        textResult.innerText = `O seu resultado final foi de ${score} pontos, você acertou ${rightQuestions} de ${MAX_QUESTIONS}!`;
     }
     else
     {
@@ -123,6 +124,7 @@ function selection(playerAnswer)
     {
         score += 100 + tempo * 2;
         scoreHTML.innerText = `Score: ${score}`;
+        rightQuestions++;
     }
 
     images.forEach((image, index) =>
@@ -149,10 +151,10 @@ function selection(playerAnswer)
             {
                 buttons[index].classList.remove('wrong');
             }
-        })
+        });
         resetTimer();
         getQuestion();
-    }, 3000)
+    }, 3000);
 }
 
 start();
