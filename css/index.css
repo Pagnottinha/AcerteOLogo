@@ -22,9 +22,10 @@ button
     font-size: 1.75rem;
     border: none;
     cursor: pointer;
-    box-shadow: 1px 1px 3px black;
+    box-shadow: 3px 4px 6px black;
     user-select: none;
     text-align: center;
+    border-radius: 10px;
 }
 
 a
@@ -36,7 +37,7 @@ a
 h1
 {
     margin-bottom: 30px;
-    text-shadow: 1px 1px 0 white;
+    text-shadow: 3px 3px 4px white;
     user-select: none;
     text-align: center;
 }
@@ -73,7 +74,12 @@ main
     padding: 50px;
 }
 
-.instructions> :not(.instructions:last-child)
+.instructions> :is(p, h2)
 {
     margin-bottom: 20px;
+}
+
+.instructions>.instructions:last-child
+{
+    margin: 0px;
 }

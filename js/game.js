@@ -3,7 +3,6 @@ const timerProgression = document.getElementById("timerProgression"),
     questionProgressHTML = document.getElementById('questionProgress'),
     scoreHTML = document.getElementById('score'),
     brandName = document.getElementById('brandName'),
-
     images = Array.from(document.querySelectorAll("img")),
     buttons = Array.from(document.querySelectorAll("button"));
 
@@ -53,7 +52,6 @@ function setTimer()
         if (tempo <= 0)
         {
             selection(0);
-            clearInterval(timer);
         }
     }, 1000);
 }
@@ -83,10 +81,31 @@ function getQuestion()
     if (availableQuestions.length == 0 || countQuestions > MAX_QUESTIONS)
     {
         clearInterval(timer);
-        const results = document.getElementById('results');
-        const textResult = document.getElementById('textResult');
-        results.style.display = 'flex';
-        textResult.innerText = `O seu resultado final foi de ${score} pontos, você acertou ${rightQuestions} de ${MAX_QUESTIONS}!`;
+        const main = document.querySelector("main");
+        document.body.removeChild(main);
+
+        const results = document.createElement('div');
+        results.id = "results";
+        results.innerHTML = `
+            <h1 id="textResult">
+                O seu resultado final foi de ${score} pontos, você acertou ${rightQuestions} de ${MAX_QUESTIONS}!
+            </h1>
+            <div class="links">
+                <a href="./game.html">
+                    Jogar novamente
+                </a>
+                <a href="./index.html">
+                    Home
+                </a>
+            </div>
+        `;
+        document.body.appendChild(results);
+
+        const sound = document.createElement('audio');
+        sound.src = './audios/applause.mp3';
+        sound.autoplay = 'true';
+        sound.volume = "0.15";
+        document.body.appendChild(sound);
     }
     else
     {
@@ -118,6 +137,7 @@ function selection(playerAnswer)
     timerProgression.classList.add('stopProgession');
 
     acceptingQuestions = false;
+    const answerSound = document.createElement('audio');
 
     answer = currentQuestion[currentQuestion.length - 1];
     if (playerAnswer == answer)
@@ -125,7 +145,16 @@ function selection(playerAnswer)
         score += 100 + tempo * 2;
         scoreHTML.innerText = `Score: ${score}`;
         rightQuestions++;
+        answerSound.src = './audios/correct.mp3';
     }
+    else
+    {
+        answerSound.src = './audios/wrong.mp3';
+    }
+
+    answerSound.autoplay = 'true';
+    answerSound.volume = "0.15";
+    document.body.appendChild(answerSound);
 
     images.forEach((image, index) =>
     {
@@ -152,6 +181,7 @@ function selection(playerAnswer)
                 buttons[index].classList.remove('wrong');
             }
         });
+        document.body.removeChild(answerSound);
         resetTimer();
         getQuestion();
     }, 3000);

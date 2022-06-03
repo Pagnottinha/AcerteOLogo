@@ -84,11 +84,6 @@ button
     transition: transform 0.5s;
 }
 
-button:hover
-{
-    transform: scale(1.05);
-}
-
 .div-options
 {
     display: grid;
@@ -115,6 +110,12 @@ button:hover
     {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    #timer
+    {
+        width: 150px;
+    }
+
 }
 
 img
@@ -125,6 +126,7 @@ img
 .correct
 {
     background-color: green;
+    transform: scale(1.05);
 }
 
 .wrong
@@ -141,7 +143,7 @@ img
     top: 0;
     left: 0;
     background-color: rgb(219, 219, 219, 0.95);
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     padding-inline: 2rem;
@@ -167,6 +169,20 @@ a
     color: black;
     padding: 2rem;
     text-align: center;
-    background-color: white;
+    background-color: rgb(245, 245, 245, 1);
     box-shadow: 1px 1px 5px black;
+}
+
+@media screen and (hover:hover)
+{
+    button:hover
+    {
+        transform: scale(1.05);
+    }
+
+    a:hover
+    {
+        opacity: 0.9;
+        box-shadow: 2px 2px 5px black;
+    }
 }
