@@ -15,6 +15,53 @@ body
     min-height: 100%;
 }
 
+#div-getUserName
+{
+    align-items: center;
+    flex-direction: column-reverse;
+    gap: 10px;
+}
+
+span
+{
+    position: relative;
+    top: 5rem;
+    transition: top 500ms ease-in-out;
+    z-index: 10;
+}
+
+input
+{
+    width: 7rem;
+    height: 4.5rem;
+    font-size: 2rem;
+    padding: 1.5rem 0 0;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid white;
+    text-align: center;
+    transition: width 500ms ease-in-out;
+}
+
+input:focus
+{
+    width: 15rem;
+    outline: none;
+}
+
+input:focus~span
+{
+    top: 1.5rem;
+}
+
+.btnStart
+{
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+    font-size: 1.5rem;
+}
+
 nav
 {
     display: flex;
@@ -81,14 +128,16 @@ button
     max-width: 250px;
     background-color: white;
     cursor: pointer;
+    padding: 10px;
     transition: transform 0.5s;
+    border-radius: 10px;
 }
 
 .div-options
 {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 @media screen and (min-width: 600px)
@@ -125,16 +174,16 @@ img
 
 .correct
 {
-    background-color: green;
+    background-color: rgb(0, 128, 0, 0.5);
     transform: scale(1.05);
 }
 
 .wrong
 {
-    background-color: red;
+    background-color: rgb(255, 0, 0, 0.5);
 }
 
-#results
+.center-div
 {
     position: absolute;
     width: 100%;

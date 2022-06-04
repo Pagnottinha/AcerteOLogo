@@ -1,11 +1,11 @@
 function instructions()
 {
     const instruction = document.getElementById("instructions")
-    if (instruction) return
+    if (instruction) return;
 
     const createIns = document.createElement('div');
     createIns.id = "instructions";
-    createIns.className = "instructions";
+    createIns.className = "options";
     createIns.innerHTML = `   
         <h2>Como jogar?</h2>
         <p>

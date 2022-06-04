@@ -62,7 +62,7 @@ main
     gap: 10px
 }
 
-.instructions
+.options
 {
     position: absolute;
     width: 100vw;
@@ -74,12 +74,17 @@ main
     padding: 50px;
 }
 
-.instructions> :is(p, h2)
+#instructions> :is(p, h2)
 {
     margin-bottom: 20px;
 }
 
-.instructions>.instructions:last-child
+#instructions>#instructions:last-child
 {
     margin: 0px;
+}
+
+.highscores
+{
+    background-color: rgb(255, 255, 160);
 }

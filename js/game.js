@@ -4,7 +4,8 @@ const timerProgression = document.getElementById("timerProgression"),
     scoreHTML = document.getElementById('score'),
     brandName = document.getElementById('brandName'),
     images = Array.from(document.querySelectorAll("img")),
-    buttons = Array.from(document.querySelectorAll("button"));
+    buttons = Array.from(document.querySelectorAll("main button")),
+    userNameInput = document.getElementById("userName");
 
 const questions = [
     [
@@ -16,13 +17,29 @@ const questions = [
         1
     ],
     [
-        'Teste',
-        './images/Starbucks/PngFake/Starbucks-FakeLogo01 (1).png',
-        './images/Starbucks/PngFake/Starbucks-FakeLogo01 (1).png',
-        './images/Starbucks/PngReal/Starbucks-RealLogo.png',
-        './images/Starbucks/PngFake/Starbucks-FakeLogo01 (1).png',
+        'McDonalds',
+        './images/McDonalds/PngFake/McDonaldsFake01.png',
+        './images/McDonalds/PngFake/McDonaldsFake02.png',
+        './images/McDonalds/PngReal/McDonaldsReal.png',
+        './images/McDonalds/PngFake/McDonaldsFake03.png',
         3
-    ]
+    ],
+    [
+        'KFC',
+        './images/KFC/PngFake/KFCFake01.png',
+        './images/KFC/PngReal/KFCReal.png',
+        './images/KFC/PngFake/KFCFake02.png',
+        './images/KFC/PngFake/KFCFake03.png',
+        2
+    ],
+    [
+        'Coca-Cola',
+        './images/Coca-Cola/PngFake/cocaColaFake01.png',
+        './images/Coca-Cola/PngFake/cocaColaFake02.png',
+        './images/Coca-Cola/PngFake/cocaColaFake03.png',
+        './images/Coca-Cola/PngReal/cocaColaReal.png',
+        4
+    ],
 ];
 
 const MAX_QUESTIONS = questions.length;
@@ -34,7 +51,30 @@ let countQuestions,
     currentQuestion,
     acceptingQuestions,
     timer,
+    tempo,
+    username;
+
+function loseFocus()
+{
+    if (userNameInput.value !== "") return userNameInput.focus();
+}
+
+function start()
+{
+    if (userNameInput.value === "") return;
+
+    username = userNameInput.value;
+
+    const divStart = document.getElementById("div-getUserName");
+    document.body.removeChild(divStart);
+
+    score = 0;
+    countQuestions = 0;
+    availableQuestions = questions;
     tempo = 15;
+
+    getQuestion();
+}
 
 function setTimer()
 {
@@ -62,18 +102,7 @@ function resetTimer()
     timerProgression.classList.remove('stopProgession');
     tempo = 15;
     timerProgression.offsetWidth;
-    setTimer();
     timerHTML.innerText = "00:15";
-}
-
-function start()
-{
-    score = 0;
-    countQuestions = 0;
-    availableQuestions = questions;
-
-    setTimer();
-    getQuestion();
 }
 
 function getQuestion()
@@ -81,14 +110,18 @@ function getQuestion()
     if (availableQuestions.length == 0 || countQuestions > MAX_QUESTIONS)
     {
         clearInterval(timer);
+
+        setHighScore();
+
         const main = document.querySelector("main");
         document.body.removeChild(main);
 
         const results = document.createElement('div');
         results.id = "results";
+        results.className = 'center-div';
         results.innerHTML = `
             <h1 id="textResult">
-                O seu resultado final foi de ${score} pontos, você acertou ${rightQuestions} de ${MAX_QUESTIONS}!
+                ${username}, você acertou ${rightQuestions} de ${MAX_QUESTIONS}, com uma pontuação de ${score}!
             </h1>
             <div class="links">
                 <a href="./game.html">
@@ -126,6 +159,7 @@ function getQuestion()
 
         acceptingQuestions = true;
         timerProgression.classList.add('timerProgression');
+        setTimer();
     }
 }
 
@@ -187,4 +221,18 @@ function selection(playerAnswer)
     }, 3000);
 }
 
-start();
+function setHighScore()
+{
+    const highscores = JSON.parse(sessionStorage.getItem('highscores')) || [];
+
+    const highscore = {
+        score,
+        username
+    };
+
+    highscores.push(highscore);
+    highscores.sort((a, b) => { return b.score - a.score; });
+    highscores.splice(10);
+
+    sessionStorage.setItem('highscores', JSON.stringify(highscores));
+}
