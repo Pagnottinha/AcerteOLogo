@@ -9,19 +9,35 @@ const timerProgression = document.getElementById("timerProgression"),
 
 const questions = [
     [
-        'Starbucks',
-        './images/Starbucks/PngReal/Starbucks-RealLogo.png',
-        './images/Starbucks/PngFake/Starbucks-FakeLogo01 (1).png',
-        './images/Starbucks/PngFake/Starbucks-FakeLogo01 (1).png',
-        './images/Starbucks/PngFake/Starbucks-FakeLogo01 (1).png',
+        'Amazon',
+        './images/Amazon/PngFake/amazonFake01.png',
+        './images/Amazon/PngReal/amazonReal.png',
+        './images/Amazon/PngFake/amazonFake02.png',
+        './images/Amazon/PngFake/amazonFake03.png',
+        2
+    ],
+    [
+        'Coca-Cola',
+        './images/Coca-Cola/PngFake/cocaColaFake01.png',
+        './images/Coca-Cola/PngFake/cocaColaFake02.png',
+        './images/Coca-Cola/PngFake/cocaColaFake03.png',
+        './images/Coca-Cola/PngReal/cocaColaReal.png',
+        4
+    ],
+    [
+        'Dolly',
+        './images/Dolly/PngReal/dollyReal.png',
+        './images/Dolly/PngFake/dollyFake01.png',
+        './images/Dolly/PngFake/dollyFake02.png',
+        './images/Dolly/PngFake/dollyFake03.png',
         1
     ],
     [
-        'McDonalds',
-        './images/McDonalds/PngFake/McDonaldsFake01.png',
-        './images/McDonalds/PngFake/McDonaldsFake02.png',
-        './images/McDonalds/PngReal/McDonaldsReal.png',
-        './images/McDonalds/PngFake/McDonaldsFake03.png',
+        'Ebay',
+        './images/Ebay/PngFake/ebayFake01.png',
+        './images/Ebay/PngFake/ebayFake02.png',
+        './images/Ebay/PngReal/ebayReal.png',
+        './images/Ebay/PngFake/ebayFake03.png',
         3
     ],
     [
@@ -33,16 +49,64 @@ const questions = [
         2
     ],
     [
-        'Coca-Cola',
-        './images/Coca-Cola/PngFake/cocaColaFake01.png',
-        './images/Coca-Cola/PngFake/cocaColaFake02.png',
-        './images/Coca-Cola/PngFake/cocaColaFake03.png',
-        './images/Coca-Cola/PngReal/cocaColaReal.png',
+        'McDonalds',
+        './images/McDonalds/PngFake/McDonaldsFake01.png',
+        './images/McDonalds/PngFake/McDonaldsFake02.png',
+        './images/McDonalds/PngReal/McDonaldsReal.png',
+        './images/McDonalds/PngFake/McDonaldsFake03.png',
+        3
+    ],
+    [
+        'Nutella',
+        './images/Nutella/PngFake/NutellaFake01.png',
+        './images/Nutella/PngFake/NutellaFake02.png',
+        './images/Nutella/PngReal/NutellaReal.png',
+        './images/Nutella/PngFake/NutellaFake03.png',
+        3
+    ],
+    [
+        'RedBull',
+        './images/RedBull/PngFake/redbullFake01.png',
+        './images/RedBull/PngFake/redbullFake02.png',
+        './images/RedBull/PngFake/redbullFake03.png',
+        './images/RedBull/PngReal/redbullReal.png',
         4
+    ],
+    [
+        'Rolls-Royce',
+        './images/Rolls/PngFake/rollsFake01.png',
+        './images/Rolls/PngFake/rollsFake02.png',
+        './images/Rolls/PngReal/rollsReal.png',
+        './images/Rolls/PngFake/rollsFake03.png',
+        3
+    ],
+    [
+        'Shakhtar Donetsk',
+        './images/Shakhtar/PngReal/shakhtarReal.png',
+        './images/Shakhtar/PngFake/shakhtarFake01.png',
+        './images/Shakhtar/PngFake/shakhtarFake02.png',
+        './images/Shakhtar/PngFake/shakhtarFake03.png',
+        1
+    ],
+    [
+        'Tommy Hilfiger',
+        './images/Tommy/PngReal/tommyReal.png',
+        './images/Tommy/PngFake/tommyFake01.png',
+        './images/Tommy/PngFake/tommyFake02.png',
+        './images/Tommy/PngFake/tommyFake03.png',
+        1
+    ],
+    [
+        'Starbucks',
+        './images/Starbucks/PngReal/StarbucksReal.png',
+        './images/Starbucks/PngFake/StarbucksFake01.png',
+        './images/Starbucks/PngFake/StarbucksFake02.png',
+        './images/Starbucks/PngFake/StarbucksFake03.png',
+        1
     ],
 ];
 
-const MAX_QUESTIONS = questions.length;
+const MAX_QUESTIONS = 10;
 
 let countQuestions,
     availableQuestions,
@@ -59,10 +123,25 @@ function loseFocus()
     if (userNameInput.value !== "") return userNameInput.focus();
 }
 
+function containsSpecialChars(string)
+{
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(string);
+}
+
 function start()
 {
-    if (userNameInput.value === "") return;
-
+    const p = document.querySelector('#div-getUserName p')
+    if (userNameInput.value === "")
+    {
+        p.style.opacity = '1';
+        return p.innerText = 'Digite um nome.';
+    }
+    if (containsSpecialChars(userNameInput.value))
+    {
+        p.style.opacity = '1';
+        return p.innerText = 'Sem caracteres especiais!';
+    }
     username = userNameInput.value;
 
     const divStart = document.getElementById("div-getUserName");
@@ -107,7 +186,7 @@ function resetTimer()
 
 function getQuestion()
 {
-    if (availableQuestions.length == 0 || countQuestions > MAX_QUESTIONS)
+    if (availableQuestions.length == 0 || countQuestions >= MAX_QUESTIONS)
     {
         clearInterval(timer);
 
@@ -177,7 +256,7 @@ function selection(playerAnswer)
     if (playerAnswer == answer)
     {
         score += 100 + tempo * 2;
-        scoreHTML.innerText = `Score: ${score}`;
+        scoreHTML.innerText = `Pontuação: ${score}`;
         rightQuestions++;
         answerSound.src = './audios/correct.mp3';
     }

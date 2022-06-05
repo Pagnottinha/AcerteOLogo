@@ -22,6 +22,13 @@ body
     gap: 10px;
 }
 
+#div-getUserName p
+{
+    opacity: 0;
+    font-size: 1.5rem;
+    transition: all 500ms ease;
+}
+
 span
 {
     position: relative;
@@ -83,6 +90,7 @@ nav p
     height: 5px;
     background-color: green;
     animation: time 15s linear;
+    box-shadow: -1px 3px 10px green;
 }
 
 .stopProgession
